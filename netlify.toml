@@ -1,0 +1,258 @@
+[build]
+  command = "npm run verify:deploy"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+  VITE_SERENITY_ADMIN_API_BASE = "https://serenity-backend-mseu.onrender.com/api/admin"
+
+[build.processing.html]
+  pretty_urls = true
+
+# Canonical entry point.
+[[redirects]]
+  from = "/"
+  to = "/login"
+  status = 302
+
+# Pretty public routes. These are rewrites, so the clean URL stays in the browser.
+[[redirects]]
+  from = "/login"
+  to = "/production/login.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/dashboard"
+  to = "/production/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/scheduling"
+  to = "/production/index2.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/clinical"
+  to = "/production/index3.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/finance"
+  to = "/production/index4.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/operations"
+  to = "/production/operations.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/reports"
+  to = "/production/chartjs.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/calendar"
+  to = "/production/calendar.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/inbox"
+  to = "/production/inbox.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/staff"
+  to = "/production/staff.html"
+  status = 200
+  force = true
+
+# Backward-compatible redirects for old HTML URLs.
+[[redirects]]
+  from = "/production/login.html"
+  to = "/login"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/production/index.html"
+  to = "/dashboard"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/production/index2.html"
+  to = "/scheduling"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/production/index3.html"
+  to = "/clinical"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/production/index4.html"
+  to = "/finance"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/production/operations.html"
+  to = "/operations"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/production/chartjs.html"
+  to = "/reports"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/production/calendar.html"
+  to = "/calendar"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/production/inbox.html"
+  to = "/inbox"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/production/staff.html"
+  to = "/staff"
+  status = 301
+  force = true
+
+# Normalize Netlify Pretty-URL versions of the old /production paths.
+[[redirects]]
+  from = "/production/login"
+  to = "/login"
+  status = 301
+
+[[redirects]]
+  from = "/production/index"
+  to = "/dashboard"
+  status = 301
+
+[[redirects]]
+  from = "/production/index2"
+  to = "/scheduling"
+  status = 301
+
+[[redirects]]
+  from = "/production/index3"
+  to = "/clinical"
+  status = 301
+
+[[redirects]]
+  from = "/production/index4"
+  to = "/finance"
+  status = 301
+
+[[redirects]]
+  from = "/production/operations"
+  to = "/operations"
+  status = 301
+
+[[redirects]]
+  from = "/production/chartjs"
+  to = "/reports"
+  status = 301
+
+[[redirects]]
+  from = "/production/calendar"
+  to = "/calendar"
+  status = 301
+
+[[redirects]]
+  from = "/production/inbox"
+  to = "/inbox"
+  status = 301
+
+[[redirects]]
+  from = "/production/staff"
+  to = "/staff"
+  status = 301
+
+# Also normalize accidental root-level legacy filenames.
+[[redirects]]
+  from = "/login.html"
+  to = "/login"
+  status = 301
+
+[[redirects]]
+  from = "/index.html"
+  to = "/dashboard"
+  status = 301
+
+[[redirects]]
+  from = "/index2.html"
+  to = "/scheduling"
+  status = 301
+
+[[redirects]]
+  from = "/index3.html"
+  to = "/clinical"
+  status = 301
+
+[[redirects]]
+  from = "/index4.html"
+  to = "/finance"
+  status = 301
+
+[[redirects]]
+  from = "/operations.html"
+  to = "/operations"
+  status = 301
+
+[[redirects]]
+  from = "/chartjs.html"
+  to = "/reports"
+  status = 301
+
+[[redirects]]
+  from = "/calendar.html"
+  to = "/calendar"
+  status = 301
+
+[[redirects]]
+  from = "/inbox.html"
+  to = "/inbox"
+  status = 301
+
+[[redirects]]
+  from = "/staff.html"
+  to = "/staff"
+  status = 301
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Robots-Tag = "noindex, nofollow, noarchive"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

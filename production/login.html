@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In | Serenity Admin</title>
+  <link rel="icon" href="/images/favicon.ico">
+  <style>html,body{margin:0;min-height:100%;background:#f4f7fb}body{font-family:Arial,sans-serif}.serenity-login-page{min-height:100vh;display:grid;place-items:center;padding:24px}.serenity-login-card{width:min(440px,100%);background:white;border:1px solid #e5eaf0;border-radius:18px;padding:34px;box-shadow:0 16px 48px rgba(32,50,71,.10)}.serenity-login-brand{display:flex;align-items:center;gap:12px;margin-bottom:28px;color:#203247}.serenity-login-mark{width:42px;height:42px;border-radius:12px;background:#1abb9c;color:white;display:grid;place-items:center;font-weight:800}.serenity-login-card h1{font-size:1.45rem;margin:0}.serenity-login-card p{color:#6f7e8d;margin:.35rem 0 0}.serenity-field{display:grid;gap:6px;margin:16px 0}.serenity-field label{font-size:.82rem;font-weight:700;color:#536273}.serenity-field input{min-height:44px;border:1px solid #ccd6df;border-radius:9px;padding:0 12px;font-size:1rem}.serenity-login-button{width:100%;min-height:44px;border:0;border-radius:9px;background:#1abb9c;color:white;font-weight:800;cursor:pointer}.serenity-login-button:disabled{opacity:.6}.alert{padding:12px;border-radius:8px;margin:0 0 14px}.alert-danger{background:#fff0f0;color:#9d3232}.alert-success{background:#eaf8f3;color:#11775f}</style>
+</head>
+<body data-page-title="Sign In">
+  <main class="serenity-login-page">
+    <section class="serenity-login-card" aria-labelledby="login-title">
+      <div class="serenity-login-brand"><div class="serenity-login-mark">S</div><div><h1 id="login-title">Serenity Admin</h1><p>Authorized Serenity Care Service access</p></div></div>
+      <div id="serenity-login-message" hidden></div>
+      <form id="loginForm" autocomplete="on">
+        <div class="serenity-field"><label for="username">Email</label><input id="username" name="email" type="email" autocomplete="username" required></div>
+        <div class="serenity-field"><label for="password">Password</label><input id="password" name="password" type="password" autocomplete="current-password" required></div>
+        <button class="serenity-login-button" type="submit">Sign In</button>
+      </form>
+    </section>
+  </main>
+  <script type="module" src="/src/main-core.js"></script>
+</body>
+</html>

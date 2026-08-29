@@ -1,0 +1,16 @@
+﻿{
+  "dashboard": {
+    "counts": {
+      "total_leads": 0,
+      "open_leads": 0,
+      "total_appointments": 0,
+      "open_appointments": 0,
+      "total_contact_messages": 0,
+      "unread_contact_messages": 0,
+      "total_conversations": 0,
+      "active_conversations": 0
+    },
+    "statusBreakdown": [],
+    "activityFeed": []
+  }
+}

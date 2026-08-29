@@ -2,15 +2,15 @@ import "./admin-ui.css";
 import { pageKeyFromPath } from "./admin-routes.js";
 
 const PAGE_MODULES = {
-  "index.html": "./wire-control-center.js",
-  "index2.html": "./wire-scheduling-workforce.js",
-  "index3.html": "./wire-clinical-quality.js",
-  "index4.html": "./wire-business-performance.js",
-  "operations.html": "./wire-operations.js",
-  "chartjs.html": "./wire-chartjs.js",
-  "calendar.html": "./wire-calendar.js",
-  "inbox.html": "./wire-inbox.js",
-  "staff.html": "./wire-staff-access.js"
+  "index.html": () => import("./wire-control-center.js"),
+  "index2.html": () => import("./wire-scheduling-workforce.js"),
+  "index3.html": () => import("./wire-clinical-quality.js"),
+  "index4.html": () => import("./wire-business-performance.js"),
+  "operations.html": () => import("./wire-operations.js"),
+  "chartjs.html": () => import("./wire-chartjs.js"),
+  "calendar.html": () => import("./wire-calendar.js"),
+  "inbox.html": () => import("./wire-inbox.js"),
+  "staff.html": () => import("./wire-staff-access.js")
 };
 
 function domReady() {
@@ -32,8 +32,8 @@ async function boot() {
   const user = await initAdminLayout();
   if (!user) return;
 
-  const modulePath = PAGE_MODULES[page] || "./wire-operations.js";
-  const module = await import(modulePath);
+  const loadPageModule = PAGE_MODULES[page] || PAGE_MODULES["operations.html"];
+  const module = await loadPageModule();
   await module.initPage?.();
   document.documentElement.dataset.serenityReady = "true";
 }

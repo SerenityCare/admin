@@ -21,7 +21,8 @@
     "analyze": "npm run build && open dist/stats.html",
     "analyze:ci": "npm run build",
     "verify:routes": "node scripts/verify-netlify-routes.mjs",
-    "verify:deploy": "npm run verify:routes && npm run build"
+    "verify:deploy": "npm run verify:routes && npm run build && npm run verify:build",
+    "verify:build": "node scripts/verify-built-modules.mjs"
   },
   "license": "MIT",
   "main": "src/main.js",

@@ -20,8 +20,9 @@ const netlifyPath = join(root, "netlify.toml");
 const routesPath = join(root, "src", "serenity-admin", "admin-routes.js");
 const vitePath = join(root, "vite.config.js");
 const apiPath = join(root, "src", "serenity-admin", "admin-api.js");
+const adminEntryPath = join(root, "src", "serenity-admin", "admin-entry.js");
 
-for (const path of [netlifyPath, routesPath, vitePath, apiPath, join(root, "public", "404.html")]) {
+for (const path of [netlifyPath, routesPath, vitePath, apiPath, adminEntryPath, join(root, "public", "404.html")]) {
   if (!existsSync(path)) failures.push(`Missing required deployment file: ${path}`);
 }
 
@@ -29,6 +30,7 @@ const netlify = existsSync(netlifyPath) ? readFileSync(netlifyPath, "utf8") : ""
 const routes = existsSync(routesPath) ? readFileSync(routesPath, "utf8") : "";
 const vite = existsSync(vitePath) ? readFileSync(vitePath, "utf8") : "";
 const api = existsSync(apiPath) ? readFileSync(apiPath, "utf8") : "";
+const adminEntry = existsSync(adminEntryPath) ? readFileSync(adminEntryPath, "utf8") : "";
 
 if (!netlify.includes('pretty_urls = true')) failures.push("Netlify Pretty URLs is not enabled.");
 if (!netlify.includes('VITE_SERENITY_ADMIN_API_BASE = "https://serenity-backend-mseu.onrender.com/api/admin"')) {
@@ -36,6 +38,27 @@ if (!netlify.includes('VITE_SERENITY_ADMIN_API_BASE = "https://serenity-backend-
 }
 if (!api.includes('https://serenity-backend-mseu.onrender.com/api/admin')) {
   failures.push("Admin API production fallback is missing or incorrect.");
+}
+
+const expectedLazyModules = [
+  "wire-control-center.js",
+  "wire-scheduling-workforce.js",
+  "wire-clinical-quality.js",
+  "wire-business-performance.js",
+  "wire-operations.js",
+  "wire-chartjs.js",
+  "wire-calendar.js",
+  "wire-inbox.js",
+  "wire-staff-access.js"
+];
+
+if (/import\s*\(\s*modulePath\s*\)/.test(adminEntry)) {
+  failures.push("admin-entry.js uses a variable dynamic import; Vite cannot bundle page modules reliably.");
+}
+for (const moduleName of expectedLazyModules) {
+  if (!adminEntry.includes(`() => import("./${moduleName}")`)) {
+    failures.push(`admin-entry.js is missing a Vite-analyzable lazy import for ${moduleName}.`);
+  }
 }
 
 for (const [publicRoute, target] of expected) {
